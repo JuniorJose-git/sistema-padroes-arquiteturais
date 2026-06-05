@@ -16,14 +16,14 @@ public class UsuarioController {
         this.usuarios = usuarios;
     }
 
-    // GET / — lista todos
+    // GET / lista todos
     @GetMapping
     public String index(Model view) {
         view.addAttribute("usuarios", usuarios.findAll());
         return "listar"; // nome da View
     }
 
-    // GET /novo — exibe formulário de criação
+    // GET /novo exibe formulário de criação
     @GetMapping("/novo")
     public String create(Model view) {
         view.addAttribute("usuario", new Usuario());
@@ -31,14 +31,14 @@ public class UsuarioController {
         return "formulario"; // nome da View
     }
 
-    // POST /novo — persiste novo usuário
+    // POST /novo persiste novo usuário
     @PostMapping("/novo")
     public String store(@ModelAttribute Usuario usuario) {
         usuarios.save(usuario);
         return "redirect:/";
     }
 
-    // GET //{id}/editar — exibe formulário de edição
+    // GET //{id}/editar exibe formulário de edição
     @GetMapping("/{id}/editar")
     public String edit(@PathVariable Long id, Model view) {
         Usuario usuario = usuarios.findById(id)
@@ -48,7 +48,7 @@ public class UsuarioController {
         return "formulario";
     }
 
-    // POST /{id}/editar — persiste atualização
+    // POST /{id}/editar persiste atualização
     @PostMapping("/{id}/editar")
     public String update(@PathVariable Long id, @ModelAttribute Usuario usuario) {
         usuario.setId(id);
@@ -56,7 +56,7 @@ public class UsuarioController {
         return "redirect:/";
     }
 
-    // POST /{id}/excluir — remove registro
+    // POST /{id}/excluir remove registro
     @PostMapping("/{id}/excluir")
     public String destroy(@PathVariable Long id) {
         usuarios.deleteById(id);
